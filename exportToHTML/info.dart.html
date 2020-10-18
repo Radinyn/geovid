@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>info.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #a9b7c6;}
+.s1 { color: #6a8759;}
+.s2 { color: #cc7832;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+info.dart</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">'package:flutter/material.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'langmanager.dart'</span><span class="s2">;</span>
+
+<span class="s2">class </span><span class="s0">Info </span><span class="s2">extends </span><span class="s0">StatefulWidget {</span>
+  <span class="s0">@override</span>
+  <span class="s0">_InfoState createState() =&gt; _InfoState()</span><span class="s2">;</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">_InfoState </span><span class="s2">extends </span><span class="s0">State&lt;Info&gt; {</span>
+
+  <span class="s0">Map data = {}</span><span class="s2">;</span>
+  <span class="s0">String lang = </span><span class="s1">&quot;EN&quot;</span><span class="s2">;</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+
+    <span class="s0">data = ModalRoute.of(context).settings.arguments</span><span class="s2">;</span>
+    <span class="s0">lang = data[</span><span class="s1">'lang'</span><span class="s0">]</span><span class="s2">;</span>
+
+    <span class="s2">return </span><span class="s0">Scaffold(</span>
+      <span class="s0">appBar: AppBar(title: Text(LM.t[lang][</span><span class="s1">'INFO'</span><span class="s0">]))</span><span class="s2">,</span>
+      <span class="s0">body: Column(</span>
+        <span class="s0">mainAxisAlignment: MainAxisAlignment.end</span><span class="s2">,</span>
+        <span class="s0">crossAxisAlignment: CrossAxisAlignment.center</span><span class="s2">,</span>
+        <span class="s0">children: [</span>
+          <span class="s0">Expanded(child: Center(child: Image.network(</span><span class="s1">'https://i.imgur.com/fHAz2yA.png'</span><span class="s0">)))</span><span class="s2">,</span>
+          <span class="s0">Text(</span>
+              <span class="s0">LM.t[lang][</span><span class="s1">'US'</span><span class="s0">]</span><span class="s2">,</span>
+              <span class="s0">style: TextStyle(</span>
+                <span class="s0">fontSize: </span><span class="s3">20</span><span class="s2">,</span>
+              <span class="s0">)</span>
+          <span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">SizedBox(height: </span><span class="s3">10</span><span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">Text(</span>
+              <span class="s0">LM.t[lang][</span><span class="s1">'HH'</span><span class="s0">]</span>
+          <span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">SizedBox(height: </span><span class="s3">5</span><span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">Text(</span>
+              <span class="s0">LM.t[lang][</span><span class="s1">'DATA'</span><span class="s0">]</span>
+          <span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">SizedBox(height: </span><span class="s3">5</span><span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">]</span><span class="s2">,</span>
+      <span class="s0">)</span>
+    <span class="s0">)</span><span class="s2">;</span>
+  <span class="s0">}</span>
+<span class="s0">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>loading.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #a9b7c6;}
+.s1 { color: #6a8759;}
+.s2 { color: #cc7832;}
+.s3 { color: #808080;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+loading.dart</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">'dart:convert'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter/material.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter_spinkit/flutter_spinkit.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:http/http.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'country.dart'</span><span class="s2">;</span>
+
+<span class="s2">class </span><span class="s0">Loading </span><span class="s2">extends </span><span class="s0">StatefulWidget {</span>
+  <span class="s0">@override</span>
+  <span class="s0">_LoadingState createState() =&gt; _LoadingState()</span><span class="s2">;</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">_LoadingState </span><span class="s2">extends </span><span class="s0">State&lt;Loading&gt; {</span>
+
+  <span class="s2">void </span><span class="s0">addCountry(k</span><span class="s2">, </span><span class="s0">v) { </span><span class="s3">// TODO: MAYBE SET TO 0 if NULL?</span>
+    <span class="s2">if </span><span class="s0">(k.length == </span><span class="s4">3</span><span class="s0">) {</span>
+      <span class="s2">try </span><span class="s0">{</span>
+        <span class="s0">Country ctr = </span><span class="s2">new </span><span class="s0">Country(</span>
+            <span class="s0">k.toString()</span><span class="s2">,</span>
+            <span class="s0">v[</span><span class="s1">&quot;data&quot;</span><span class="s0">][v[</span><span class="s1">&quot;data&quot;</span><span class="s0">].length - </span><span class="s4">1</span><span class="s0">][</span><span class="s1">'total_cases'</span><span class="s0">].round()</span><span class="s2">,</span>
+            <span class="s0">v[</span><span class="s1">&quot;data&quot;</span><span class="s0">][v[</span><span class="s1">&quot;data&quot;</span><span class="s0">].length - </span><span class="s4">1</span><span class="s0">][</span><span class="s1">'total_cases_per_million'</span><span class="s0">]</span><span class="s2">,</span>
+            <span class="s0">v[</span><span class="s1">&quot;data&quot;</span><span class="s0">][v[</span><span class="s1">&quot;data&quot;</span><span class="s0">].length - </span><span class="s4">1</span><span class="s0">][</span><span class="s1">'new_cases'</span><span class="s0">].round()</span><span class="s2">,</span>
+        <span class="s0">)</span><span class="s2">;</span>
+        <span class="s0">Countries.add(ctr)</span><span class="s2">;</span>
+      <span class="s0">}</span>
+      <span class="s2">catch </span><span class="s0">(e) {}</span>
+    <span class="s0">}</span>
+  <span class="s0">}</span>
+
+  <span class="s0">List&lt;Country&gt; Countries = []</span><span class="s2">;</span>
+  <span class="s2">void </span><span class="s0">getData() async {</span>
+    <span class="s3">//data from the back of the array</span>
+   <span class="s0">Response response = await get(</span><span class="s1">'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.json'</span><span class="s0">)</span><span class="s2">;</span>
+   <span class="s0">Map data = jsonDecode(response.body)</span><span class="s2">;</span>
+   <span class="s0">data.forEach(addCountry)</span><span class="s2">;</span>
+   <span class="s0">Navigator.pushReplacementNamed(context</span><span class="s2">, </span><span class="s1">'/home'</span><span class="s2">, </span><span class="s0">arguments: {</span><span class="s1">'Countries'</span><span class="s0">: Countries })</span><span class="s2">;</span>
+  <span class="s0">}</span>
+
+  <span class="s0">@override</span>
+  <span class="s2">void </span><span class="s0">initState() {</span>
+    <span class="s2">super</span><span class="s0">.initState()</span><span class="s2">;</span>
+    <span class="s0">getData()</span><span class="s2">;</span>
+  <span class="s0">}</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+    <span class="s2">return </span><span class="s0">Scaffold(</span>
+      <span class="s0">backgroundColor: Colors.lightBlue</span><span class="s2">,</span>
+      <span class="s0">body: Center(</span>
+        <span class="s0">child: Column(</span>
+          <span class="s0">mainAxisAlignment: MainAxisAlignment.spaceEvenly</span><span class="s2">,</span>
+          <span class="s0">children: [</span>
+            <span class="s0">SpinKitFoldingCube(color: Colors.white</span><span class="s2">, </span><span class="s0">size: </span><span class="s4">50</span><span class="s0">)</span><span class="s2">,</span>
+            <span class="s0">Padding(</span>
+              <span class="s0">padding: </span><span class="s2">const </span><span class="s0">EdgeInsets.all(</span><span class="s4">20.0</span><span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">child: Center(child: Image.network(</span><span class="s1">'https://i.imgur.com/AMK5RDF.png'</span><span class="s0">))</span><span class="s2">,</span>
+            <span class="s0">)</span><span class="s2">,</span>
+            <span class="s0">SpinKitFoldingCube(color: Colors.white</span><span class="s2">, </span><span class="s0">size: </span><span class="s4">50</span><span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">]</span><span class="s2">,</span>
+        <span class="s0">)</span>
+      <span class="s0">)</span>
+    <span class="s0">)</span><span class="s2">;</span>
+  <span class="s0">}</span>
+<span class="s0">}</span>
+</pre>
+</body>
+</html>

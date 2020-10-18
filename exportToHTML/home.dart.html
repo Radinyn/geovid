@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>home.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #a9b7c6;}
+.s1 { color: #6a8759;}
+.s2 { color: #cc7832;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+home.dart</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">'package:flutter/material.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'gmap.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'country.dart'</span><span class="s2">;</span>
+
+<span class="s2">class </span><span class="s0">Home </span><span class="s2">extends </span><span class="s0">StatefulWidget {</span>
+  <span class="s0">@override</span>
+  <span class="s0">_HomeState createState() =&gt; _HomeState()</span><span class="s2">;</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">_HomeState </span><span class="s2">extends </span><span class="s0">State&lt;Home&gt; {</span>
+
+  <span class="s0">String lang = </span><span class="s1">'EN'</span><span class="s2">;</span>
+  <span class="s0">String mode = </span><span class="s1">'TCPM'</span><span class="s2">;</span>
+  <span class="s0">Map data = {}</span><span class="s2">;</span>
+  <span class="s0">List&lt;Country&gt; Countries = []</span><span class="s2">;</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+
+    <span class="s0">data = data.isEmpty ? ModalRoute.of(context).settings.arguments : data</span><span class="s2">;</span>
+    <span class="s0">Countries = data[</span><span class="s1">'Countries'</span><span class="s0">]</span><span class="s2">;</span>
+
+    <span class="s2">return </span><span class="s0">Scaffold(</span>
+      <span class="s0">body: Container(</span>
+        <span class="s0">color: Colors.lightBlue</span><span class="s2">,</span>
+        <span class="s0">child: SafeArea(</span>
+          <span class="s0">child: Column(</span>
+            <span class="s0">mainAxisAlignment: MainAxisAlignment.start</span><span class="s2">,</span>
+            <span class="s0">children: [</span>
+              <span class="s0">Row(</span>
+                <span class="s0">mainAxisAlignment: MainAxisAlignment.spaceEvenly</span><span class="s2">,</span>
+                <span class="s0">children: [</span>
+                  <span class="s0">Material(</span>
+                    <span class="s0">color: Colors.lightBlue</span><span class="s2">,</span>
+                    <span class="s0">child: IconButton(</span>
+                      <span class="s0">padding: </span><span class="s2">const </span><span class="s0">EdgeInsets.all(</span><span class="s3">8.0</span><span class="s0">)</span><span class="s2">,</span>
+                      <span class="s0">color: Colors.white</span><span class="s2">,</span>
+                      <span class="s0">icon: Icon( Icons.map )</span><span class="s2">,</span>
+                      <span class="s0">onPressed: () async {</span>
+                        <span class="s0">dynamic result = await Navigator.pushNamed(context</span><span class="s2">, </span><span class="s1">'/home/mode'</span><span class="s2">, </span><span class="s0">arguments: {</span><span class="s1">'lang'</span><span class="s0">: lang})</span><span class="s2">;</span>
+                        <span class="s0">setState(() {</span>
+                          <span class="s0">mode = result[</span><span class="s1">'mode'</span><span class="s0">]</span><span class="s2">;</span>
+                        <span class="s0">})</span><span class="s2">;</span>
+                      <span class="s0">}</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">Material(</span>
+                    <span class="s0">color: Colors.lightBlue</span><span class="s2">,</span>
+                    <span class="s0">child: IconButton(</span>
+                        <span class="s0">padding: </span><span class="s2">const </span><span class="s0">EdgeInsets.all(</span><span class="s3">8.0</span><span class="s0">)</span><span class="s2">,</span>
+                        <span class="s0">color: Colors.white</span><span class="s2">,</span>
+                        <span class="s0">icon: Icon( Icons.language )</span><span class="s2">,</span>
+                        <span class="s0">onPressed: () async {</span>
+                          <span class="s0">dynamic result = await Navigator.pushNamed(context</span><span class="s2">, </span><span class="s1">'/home/lang'</span><span class="s0">)</span><span class="s2">;</span>
+                          <span class="s0">setState(() {</span>
+                            <span class="s0">lang = result[</span><span class="s1">'lang'</span><span class="s0">]</span><span class="s2">;</span>
+                          <span class="s0">})</span><span class="s2">;</span>
+                        <span class="s0">}</span><span class="s2">,</span>
+                      <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">Material(</span>
+                    <span class="s0">color: Colors.lightBlue</span><span class="s2">,</span>
+                    <span class="s0">child: IconButton(</span>
+                        <span class="s0">padding: </span><span class="s2">const </span><span class="s0">EdgeInsets.all(</span><span class="s3">8.0</span><span class="s0">)</span><span class="s2">,</span>
+                        <span class="s0">color: Colors.white</span><span class="s2">,</span>
+                        <span class="s0">icon: Icon( Icons.menu_book )</span><span class="s2">,</span>
+                        <span class="s0">onPressed: () async {Navigator.pushNamed(context</span><span class="s2">, </span><span class="s1">'/home/book'</span><span class="s2">, </span><span class="s0">arguments: {</span><span class="s1">'lang'</span><span class="s0">: lang})</span><span class="s2">;</span><span class="s0">}</span><span class="s2">,</span>
+                      <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">Material(</span>
+                    <span class="s0">color: Colors.lightBlue</span><span class="s2">,</span>
+                    <span class="s0">child: IconButton(</span>
+                        <span class="s0">padding: </span><span class="s2">const </span><span class="s0">EdgeInsets.all(</span><span class="s3">8.0</span><span class="s0">)</span><span class="s2">,</span>
+                        <span class="s0">color: Colors.white</span><span class="s2">,</span>
+                        <span class="s0">icon: Icon( Icons.info )</span><span class="s2">,</span>
+                        <span class="s0">onPressed: () async {Navigator.pushNamed(context</span><span class="s2">, </span><span class="s1">'/home/info'</span><span class="s2">, </span><span class="s0">arguments: {</span><span class="s1">'lang'</span><span class="s0">: lang})</span><span class="s2">;</span><span class="s0">}</span><span class="s2">,</span>
+                      <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">]</span><span class="s2">,</span>
+              <span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">Expanded(child: GMap(Countries</span><span class="s2">, </span><span class="s0">lang</span><span class="s2">, </span><span class="s0">mode))</span>
+            <span class="s0">]</span><span class="s2">,</span>
+          <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">)</span><span class="s2">,</span>
+      <span class="s0">)</span><span class="s2">,</span>
+    <span class="s0">)</span><span class="s2">;</span>
+  <span class="s0">}</span>
+<span class="s0">}</span>
+</pre>
+</body>
+</html>

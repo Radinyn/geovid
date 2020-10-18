@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>book.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #a9b7c6;}
+.s1 { color: #6a8759;}
+.s2 { color: #cc7832;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+book.dart</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">'package:flutter/material.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'langmanager.dart'</span><span class="s2">;</span>
+
+<span class="s2">class </span><span class="s0">Book </span><span class="s2">extends </span><span class="s0">StatefulWidget {</span>
+  <span class="s0">@override</span>
+  <span class="s0">_BookState createState() =&gt; _BookState()</span><span class="s2">;</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">_BookState </span><span class="s2">extends </span><span class="s0">State&lt;Book&gt; {</span>
+
+  <span class="s0">Map data = {}</span><span class="s2">;</span>
+  <span class="s0">String lang = </span><span class="s1">&quot;EN&quot;</span><span class="s2">;</span>
+  <span class="s0">List&lt;String&gt; images = [</span>
+    <span class="s1">'https://i.imgur.com/RVbUfZU.png'</span><span class="s2">,</span>
+    <span class="s1">'https://i.imgur.com/BnVPif7.png'</span><span class="s2">,</span>
+    <span class="s1">'https://i.imgur.com/sVFKc7I.png'</span><span class="s2">,</span>
+    <span class="s1">'https://i.imgur.com/ulXlpU4.png'</span><span class="s2">,</span>
+    <span class="s1">'https://i.imgur.com/HOJ2alw.png'</span><span class="s2">,</span>
+    <span class="s1">'https://i.imgur.com/oOsTTlc.png'</span><span class="s2">,</span>
+  <span class="s0">]</span><span class="s2">;</span>
+
+  <span class="s0">Card getCard(int index) =&gt; Card(</span>
+      <span class="s0">child: Column(</span>
+        <span class="s0">children: [</span>
+          <span class="s0">Center(child: Text(LM.t[lang][</span><span class="s1">'TIP</span><span class="s0">${index}</span><span class="s1">T'</span><span class="s0">]</span><span class="s2">, </span><span class="s0">style : TextStyle(fontSize: </span><span class="s3">20</span><span class="s0">)))</span><span class="s2">,</span>
+          <span class="s0">Center(child: Text(LM.t[lang][</span><span class="s1">'TIP</span><span class="s0">$index</span><span class="s1">'</span><span class="s0">]))</span><span class="s2">,</span>
+          <span class="s0">SizedBox(height: </span><span class="s3">10</span><span class="s2">,</span><span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">Center(child: Image.network(images[index-</span><span class="s3">1</span><span class="s0">]))</span><span class="s2">,</span>
+        <span class="s0">]</span><span class="s2">,</span>
+      <span class="s0">)</span>
+  <span class="s0">)</span><span class="s2">;</span>
+
+  <span class="s0">List&lt;Card&gt; getCardList() {</span>
+    <span class="s0">List&lt;Card&gt; cards = List()</span><span class="s2">;</span>
+    <span class="s2">for </span><span class="s0">(int i = </span><span class="s3">1</span><span class="s2">; </span><span class="s0">i &lt;= images.length</span><span class="s2">; </span><span class="s0">i++) {</span>
+      <span class="s0">cards.add(getCard(i))</span><span class="s2">;</span>
+    <span class="s0">}</span>
+    <span class="s2">return </span><span class="s0">cards</span><span class="s2">;</span>
+  <span class="s0">}</span>
+
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+
+    <span class="s0">data = ModalRoute.of(context).settings.arguments</span><span class="s2">;</span>
+    <span class="s0">lang = data[</span><span class="s1">'lang'</span><span class="s0">]</span><span class="s2">;</span>
+
+    <span class="s2">return </span><span class="s0">Scaffold(</span>
+      <span class="s0">appBar: AppBar(title: Text(LM.t[lang][</span><span class="s1">'TIP'</span><span class="s0">]))</span><span class="s2">,</span>
+      <span class="s0">body: ListView(</span>
+        <span class="s0">children: getCardList()</span>
+      <span class="s0">)</span>
+    <span class="s0">)</span><span class="s2">;</span>
+  <span class="s0">}</span>
+<span class="s0">}</span>
+
+</pre>
+</body>
+</html>
